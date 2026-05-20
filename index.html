@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>👑 BIGBANG 超入門 — K-POPのレジェンドを知る</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Bebas+Neue&family=Black+Ops+One&display=swap" rel="stylesheet" />
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: linear-gradient(135deg, #0a0014 0%, #1a0033 40%, #2d0052 80%, #0a0014 100%);
+    background-attachment: fixed;
+    color: #fafafa;
+    min-height: 100vh;
+  }
+  .font-display { font-family: 'Bebas Neue', 'Noto Sans JP', sans-serif; letter-spacing: 0.05em; }
+  .font-graffiti { font-family: 'Black Ops One', 'Noto Sans JP', sans-serif; }
+  .gold-text {
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FFD700 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .crown-glow { text-shadow: 0 0 24px rgba(255, 215, 0, 0.6); }
+  .vip-card {
+    background: linear-gradient(145deg, rgba(255, 215, 0, 0.08), rgba(255, 23, 68, 0.05));
+    border: 1px solid rgba(255, 215, 0, 0.25);
+    backdrop-filter: blur(8px);
+  }
+  .neon-border {
+    border: 2px solid #FFD700;
+    box-shadow: 0 0 16px rgba(255, 215, 0, 0.4), inset 0 0 16px rgba(255, 215, 0, 0.1);
+  }
+  .scroll-indicator {
+    background: linear-gradient(90deg, #FFD700, #FF1744, #FFD700);
+    background-size: 200% 100%;
+    animation: shimmer 3s linear infinite;
+  }
+  @keyframes shimmer {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 200% 0%; }
+  }
+  @keyframes pulse-gold {
+    0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
+    50% { box-shadow: 0 0 40px rgba(255, 215, 0, 0.8); }
+  }
+  .pulse-gold { animation: pulse-gold 2s ease-in-out infinite; }
+  .photo-frame {
+    background: linear-gradient(145deg, #1a0033, #0a0014);
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    transition: all 0.3s ease;
+  }
+  .photo-frame:hover { border-color: #FFD700; transform: translateY(-4px); box-shadow: 0 12px 32px rgba(255, 215, 0, 0.3); }
+  .photo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .tab-active { background: linear-gradient(135deg, #FFD700, #FFA500); color: #0a0014; font-weight: 900; box-shadow: 0 4px 16px rgba(255, 215, 0, 0.5); }
+  .tab-inactive { background: rgba(255, 255, 255, 0.05); color: #d0d0d0; }
+  .tab-inactive:hover { background: rgba(255, 215, 0, 0.15); color: #FFD700; }
+  .badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    background: rgba(255, 215, 0, 0.15);
+    color: #FFD700;
+    border: 1px solid rgba(255, 215, 0, 0.4);
+  }
+  .badge-red { background: rgba(255, 23, 68, 0.15); color: #FF6B8A; border-color: rgba(255, 23, 68, 0.4); }
+  .badge-blue { background: rgba(64, 156, 255, 0.15); color: #87C0FF; border-color: rgba(64, 156, 255, 0.4); }
+  .badge-green { background: rgba(76, 217, 100, 0.15); color: #95E8A8; border-color: rgba(76, 217, 100, 0.4); }
+  .quote-block {
+    border-left: 4px solid #FFD700;
+    background: rgba(255, 215, 0, 0.05);
+    padding: 1rem 1.5rem;
+    margin: 1rem 0;
+    font-style: italic;
+  }
+  .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 0.75rem; border: 2px solid rgba(255, 215, 0, 0.3); }
+  .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+  .nav-btn { transition: all 0.2s ease; }
+  .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+  .gradient-card { background: linear-gradient(145deg, rgba(255, 215, 0, 0.15), rgba(255, 23, 68, 0.08)); }
+  .ranking-card { background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 165, 0, 0.05)); border: 1px solid rgba(255, 215, 0, 0.3); }
+  details[open] summary .arrow { transform: rotate(90deg); }
+  .arrow { transition: transform 0.2s; display: inline-block; }
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.3); }
+  ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #FFD700, #FFA500); border-radius: 4px; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+const { useState, useEffect } = React;
+
+// ===== 画像URL集約 =====
+const IMG = {
+  group2011_main: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/BIGBANG_2011_%28current_members_since_2023%29.jpg/640px-BIGBANG_2011_%28current_members_since_2023%29.jpg',
+  logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Big_Bang_logo_%282%29.png/640px-Big_Bang_logo_%282%29.png',
+  thailand2007: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Big_Bang_In_Thailand.JPG/640px-Big_Bang_In_Thailand.JPG',
+  extraordinary: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/BIGBANG_Extraordinary_20%27s.JPG/640px-BIGBANG_Extraordinary_20%27s.JPG',
+  mtvEma: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Big_Bang_wins_MTV_EMA_award_%286324396179%29.jpg/640px-Big_Bang_wins_MTV_EMA_award_%286324396179%29.jpg',
+  madeDalian: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/BIGBANG_MADE_TOUR_IN_DALIAN.jpg/640px-BIGBANG_MADE_TOUR_IN_DALIAN.jpg',
+  madePress: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Big_Bang_2016_%27MADE%27_Press_Conference.png/640px-Big_Bang_2016_%27MADE%27_Press_Conference.png',
+  gaon2016: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/BIGBANG_on_Gaon_Chart_Music_Awards_2016.png/640px-BIGBANG_on_Gaon_Chart_Music_Awards_2016.png',
+  concert0to10: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/BIGBANG_Concert_0.TO.10_in_Seoul_-_5.jpg/640px-BIGBANG_Concert_0.TO.10_in_Seoul_-_5.jpg',
+  // メンバー個別
+  gd2025: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/G-Dragon_in_October_2025.jpg/640px-G-Dragon_in_October_2025.jpg',
+  gd2007: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/G-Dragon_in_Thailand.jpg/640px-G-Dragon_in_Thailand.jpg',
+  gdtop2011: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/GD%26TOP_performance_at_Big_Bang%27s_Big_Show%2C_2011.jpg/640px-GD%26TOP_performance_at_Big_Bang%27s_Big_Show%2C_2011.jpg',
+  gdAirbnb: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/G-Dragon_from_acrofan.JPG/640px-G-Dragon_from_acrofan.JPG',
+  gdChanel: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/G-DRAGON_CHANEL_Photo_Call_3.jpg/640px-G-DRAGON_CHANEL_Photo_Call_3.jpg',
+  taeyangMade: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Taeyang_-_MADE_THE_MOVIE_Premiere_%28cropped%29.jpg/640px-Taeyang_-_MADE_THE_MOVIE_Premiere_%28cropped%29.jpg',
+  taeyang2012: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Taeyang_2012_3.jpg/640px-Taeyang_2012_3.jpg',
+  daesungMade: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Daesung_-_MADE_THE_MOVIE_Premiere.jpg/640px-Daesung_-_MADE_THE_MOVIE_Premiere.jpg',
+  daesung2012: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Daesung_2012.jpg/640px-Daesung_2012.jpg',
+  top0to10: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/T.O.P_-_0.TO.10_in_Seoul_-_2.jpg/640px-T.O.P_-_0.TO.10_in_Seoul_-_2.jpg',
+  topLg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/BB_T.O.P_2.jpg/640px-BB_T.O.P_2.jpg',
+  top2012: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/TOP_in_2012.jpg/640px-TOP_in_2012.jpg',
+  topMade: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/T.O.P_-_MADE_THE_MOVIE_Premiere_-_2_%28cropped%29.jpg/640px-T.O.P_-_MADE_THE_MOVIE_Premiere_-_2_%28cropped%29.jpg',
+};
+
+// ===== MV情報 =====
+const MV = {
+  lies:        { id: '2Cv3phvP8Ro', title: 'Lies (거짓말)',         year: 2007 },
+  haruHaru:    { id: 'MzCbEdtNbJ0', title: 'Haru Haru (하루하루)',   year: 2008 },
+  fantastic:   { id: 'AAbokV76tkU', title: 'Fantastic Baby',         year: 2012 },
+  bangBang:    { id: '2ips2mM7Zqw', title: 'BANG BANG BANG (뱅뱅뱅)', year: 2015 },
+  loser:       { id: '1CTced9CMMk', title: 'LOSER',                  year: 2015 },
+  stillLife:   { id: 'eN5mG_yMDiM', title: 'Still Life (봄여름가을겨울)', year: 2022 },
+};
+const ytThumb = (id) => `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+
+// ===== 章データ =====
+const CHAPTERS = [
+  { id: 'prologue', emoji: '🌟', label: 'PROLOGUE', sub: 'BIGBANGって？' },
+  { id: 'members',  emoji: '👑', label: 'CHAPTER 1', sub: 'メンバー紹介' },
+  { id: 'debut',    emoji: '📜', label: 'CHAPTER 2', sub: '結成〜デビュー' },
+  { id: 'revo',     emoji: '🌍', label: 'CHAPTER 3', sub: 'K-POP革命' },
+  { id: 'songs',    emoji: '🎵', label: 'CHAPTER 4', sub: '代表曲ガイド' },
+  { id: 'solo',     emoji: '✨', label: 'CHAPTER 5', sub: 'ソロ活動' },
+  { id: 'hiatus',   emoji: '💔', label: 'CHAPTER 6', sub: '空白期間' },
+  { id: 'return',   emoji: '🎶', label: 'CHAPTER 7', sub: '再始動と現在' },
+  { id: 'cast',     emoji: '🎭', label: 'CAST',     sub: '詳細プロフィール' },
+  { id: 'quiz',     emoji: '🧠', label: 'QUIZ',     sub: '理解度チェック' },
+  { id: 'ready',    emoji: '🥹', label: 'READY',    sub: 'さらに深く' },
+];
+
+// ===== 共通コンポーネント =====
+function Photo({ src, caption, ratio = 'aspect-[4/3]' }) {
+  return (
+    <figure className={`photo-frame rounded-xl overflow-hidden ${ratio}`}>
+      <img src={src} alt={caption || ''} loading="lazy" />
+      {caption && (
+        <figcaption className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent text-xs text-gray-300 p-2">
+          {caption}
+        </figcaption>
+      )}
+    </figure>
+  );
+}
+
+function PhotoCard({ src, caption }) {
+  return (
+    <div className="relative photo-frame rounded-xl overflow-hidden aspect-[4/3]">
+      <img src={src} alt={caption || ''} loading="lazy" className="absolute inset-0" />
+      {caption && (
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent text-xs md:text-sm text-gray-200 p-2 md:p-3">
+          {caption}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function YouTubeEmbed({ id, title }) {
+  return (
+    <div className="video-wrapper">
+      <iframe
+        src={`https://www.youtube.com/embed/${id}`}
+        title={title}
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      />
+    </div>
+  );
+}
+
+function MVCard({ mv }) {
+  return (
+    <a href={`https://www.youtube.com/watch?v=${mv.id}`} target="_blank" rel="noreferrer"
+       className="block photo-frame rounded-xl overflow-hidden group">
+      <div className="relative aspect-video">
+        <img src={ytThumb(mv.id)} alt={mv.title} className="absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition flex items-center justify-center">
+          <div className="w-16 h-16 rounded-full bg-red-600/90 flex items-center justify-center group-hover:scale-110 transition">
+            <div className="w-0 h-0 border-y-[10px] border-y-transparent border-l-[16px] border-l-white ml-1"></div>
+          </div>
+        </div>
+      </div>
+      <div className="p-3 bg-black/50">
+        <div className="font-display text-xl text-yellow-300">{mv.title}</div>
+        <div className="text-xs text-gray-400">{mv.year}・公式MV</div>
+      </div>
+    </a>
+  );
+}
+
+// ===== 各章コンテンツ =====
+function PrologueChapter() {
+  return (
+    <div className="space-y-8">
+      <div className="text-center">
+        <div className="text-6xl mb-4">👑</div>
+        <h1 className="font-graffiti text-5xl md:text-7xl gold-text crown-glow">BIGBANG</h1>
+        <p className="font-display text-2xl text-yellow-200 mt-2">빅뱅 — The Kings of K-POP</p>
+      </div>
+
+      <PhotoCard src={IMG.extraordinary} caption="2011年・脂が乗りきった全盛期のBIGBANG" />
+
+      <div className="vip-card rounded-2xl p-6 md:p-8 space-y-4">
+        <h2 className="font-display text-3xl text-yellow-300">BIGBANGって何者？</h2>
+        <p className="leading-relaxed text-lg">
+          韓国のエンターテインメント企業<span className="gold-text font-bold">「YG Entertainment（ヤンスタイル・グッド）」</span>から
+          <span className="gold-text font-bold">2006年8月19日</span>にデビューした、
+          K-POP史を塗り替えた伝説のアイドルグループ。
+        </p>
+        <p className="leading-relaxed text-lg">
+          最初は5人組（G-DRAGON / T.O.P / TAEYANG / DAESUNG / SEUNGRI）で、
+          現在は<span className="gold-text font-bold">3人体制（G-DRAGON / TAEYANG / DAESUNG）</span>。
+          ファンダム名は<span className="gold-text font-bold">「VIP」</span>。
+        </p>
+        <p className="leading-relaxed text-lg">
+          メンバーが自分で曲を作り、自分でファッションを決める「<span className="gold-text font-bold">セルフプロデュース型</span>」を
+          K-POPに持ち込んだ最初のアイドル。今のBTSもSEVENTEENも、みんなこの道を歩いている。
+        </p>
+      </div>
+
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="ranking-card rounded-xl p-4 text-center">
+          <div className="font-display text-4xl gold-text">11</div>
+          <div className="text-sm text-gray-300 mt-1">韓国Gaonチャート1位曲数（史上最多級）</div>
+        </div>
+        <div className="ranking-card rounded-xl p-4 text-center">
+          <div className="font-display text-4xl gold-text">150万</div>
+          <div className="text-sm text-gray-300 mt-1">2015-16 MADE世界ツアー動員数</div>
+        </div>
+        <div className="ranking-card rounded-xl p-4 text-center">
+          <div className="font-display text-4xl gold-text">2006</div>
+          <div className="text-sm text-gray-300 mt-1">デビュー年（20年選手！）</div>
+        </div>
+        <div className="ranking-card rounded-xl p-4 text-center">
+          <div className="font-display text-4xl gold-text">2026</div>
+          <div className="text-sm text-gray-300 mt-1">Coachella出演（20周年）</div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 gap-4">
+        <PhotoCard src={IMG.mtvEma} caption="2011 MTV Europe Music Awards 受賞・アジア勢初快挙" />
+        <PhotoCard src={IMG.concert0to10} caption="2016 0.TO.10 in Seoul 10周年コンサート" />
+      </div>
+
+      <div className="quote-block">
+        <p className="text-lg">
+          「BIGBANGを聴かずにK-POPを語れない」と言われるくらい、K-POPの方向性そのものを変えたグループ。
+          このアプリで、何も知らないところから "VIP一歩手前" までざっくり追いつこう！
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function MembersChapter() {
+  const members = [
+    {
+      name: 'G-DRAGON',
+      hangul: '지드래곤', real: '권지용 / クォン・ジヨン',
+      role: 'リーダー・メインラッパー・プロデューサー',
+      birth: '1988.08.18',
+      color: 'from-yellow-400 to-orange-500',
+      photo: IMG.gd2025,
+      hook: 'BIGBANGの全曲のほぼ全部に作詞・作曲・プロデュースで関わってる。アイドルの枠を完全に超えた天才。',
+      badge: 'リーダー',
+    },
+    {
+      name: 'T.O.P',
+      hangul: '탑', real: '최승현 / チェ・スンヒョン',
+      role: 'リードラッパー・俳優',
+      birth: '1987.11.04',
+      color: 'from-red-500 to-pink-500',
+      photo: IMG.top0to10,
+      hook: '低音ボイスとクールな雰囲気で人気。アイリス・タザ・同窓生など映画でも活躍。2023年脱退済み。',
+      badge: '元メンバー',
+    },
+    {
+      name: 'TAEYANG',
+      hangul: '태양', real: '동영배 / トン・ヨンベ',
+      role: 'メインボーカル',
+      birth: '1988.05.14',
+      color: 'from-orange-500 to-red-500',
+      photo: IMG.taeyangMade,
+      hook: 'BIGBANGの「歌の核」。R&Bソウルフルな声で「Eyes, Nose, Lips」など名ソロ曲も多数。敬虔なクリスチャン。',
+      badge: '現メンバー',
+    },
+    {
+      name: 'DAESUNG',
+      hangul: '대성', real: '강대성 / カン・デソン',
+      real_jp: '日本名：D-LITE',
+      role: 'リードボーカル',
+      birth: '1989.04.26',
+      color: 'from-green-400 to-emerald-500',
+      photo: IMG.daesungMade,
+      hook: '日本でD-LITEとして単独でドーム公演できるレベルの大人気。雰囲気は明るく癒し系。',
+      badge: '現メンバー',
+    },
+    {
+      name: 'SEUNGRI',
+      hangul: '승리', real: '이승현 / イ・スンヒョン',
+      role: 'ボーカル（マンネ＝末っ子）',
+      birth: '1990.12.12',
+      color: 'from-purple-500 to-pink-500',
+      photo: IMG.gaon2016,
+      hook: '5人時代の末っ子。事業家として成功するも2019年Burning Sun事件で芸能界引退。',
+      badge: '脱退（2019）',
+      badgeColor: 'badge-red',
+    },
+  ];
+
+  return (
+    <div className="space-y-6">
+      <div className="text-center">
+        <div className="text-5xl mb-2">👑</div>
+        <h2 className="font-display text-4xl gold-text">CHAPTER 1 — メンバー紹介</h2>
+        <p className="text-yellow-200 mt-2">まずは5人をざっくり覚えよう（順番はリーダーから）</p>
+      </div>
+
+      <PhotoCard src={IMG.group2011_main} caption="2011年・5人時代のBIGBANG（現3人体制の母体）" />
+
+      <div className="space-y-5">
+        {members.map((m, i) => (
+          <div key={i} className="vip-card rounded-2xl overflow-hidden">
+            <div className="grid md:grid-cols-5">
+              <div className="md:col-span-2 aspect-square md:aspect-auto relative">
+                <img src={m.photo} alt={m.name} className="w-full h-full object-cover" loading="lazy" />
+              </div>
+              <div className="md:col-span-3 p-5 space-y-3">
+                <div className="flex items-center gap-3 flex-wrap">
+                  <h3 className={`font-graffiti text-3xl bg-gradient-to-r ${m.color} bg-clip-text text-transparent`}>{m.name}</h3>
+                  <span className={`badge ${m.badgeColor || ''}`}>{m.badge}</span>
+                </div>
+                <div className="text-sm text-gray-400 space-y-0.5">
+                  <div>ハングル：<span className="text-gray-200">{m.hangul}</span></div>
+                  <div>本名：<span className="text-gray-200">{m.real}</span></div>
+                  {m.real_jp && <div className="text-gray-200">{m.real_jp}</div>}
+                  <div>誕生日：<span className="text-gray-200">{m.birth}</span></div>
+                  <div>担当：<span className="text-yellow-300">{m.role}</span></div>
+                </div>
+                <p className="text-gray-100 leading-relaxed text-sm md:text-base">{m.hook}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="gradient-card rounded-2xl p-6">
+        <h3 className="font-display text-2xl text-yellow-300 mb-3">📝 ざっくり覚え方</h3>
+        <ul className="space-y-2 text-sm md:text-base">
+          <li><span className="gold-text font-bold">天才プロデューサー</span> = G-DRAGON（GD）</li>
+          <li><span className="gold-text font-bold">クールな低音ラップ</span> = T.O.P</li>
+          <li><span className="gold-text font-bold">ソウルフルな歌声</span> = TAEYANG</li>
+          <li><span className="gold-text font-bold">明るい癒し系の歌</span> = DAESUNG（日本名D-LITE）</li>
+          <li><span className="gold-text font-bold">末っ子（現在は引退）</span> = SEUNGRI</li>
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+function DebutChapter() {
+  return (
+    <div className="space-y-6">
+      <div className="text-center">
+        <div className="text-5xl mb-2">📜</div>
+        <h2 className="font-display text-4xl gold-text">CHAPTER 2 — 結成〜デビュー</h2>
+        <p className="text-yellow-200 mt-2">2006年8月、すべてはここから始まった</p>
+      </div>
+
+      <PhotoCard src={IMG.thailand2007} caption="2007年・タイのMTV Fast Forwardに出演した若き日のBIGBANG" />
+
+      <div className="vip-card rounded-2xl p-6 space-y-4">
+        <h3 className="font-display text-2xl text-yellow-300">🎬 サバイバル番組で選抜された5人</h3>
+        <p className="leading-relaxed">
+          BIGBANGは普通のオーディションじゃなくて、
+          YGエンタテインメント自社制作の<span className="gold-text font-bold">サバイバル形式ドキュメンタリー番組</span>で
+          6人の練習生から最終的に5人が選ばれた。
+        </p>
+        <p className="leading-relaxed">
+          脱落したのが今のWINNERのHee Seung（ヒスン）と言われていて、彼が脱落したからBIGBANGになった、っていう
+          K-POPファンの間で語り継がれる伝説エピソードがある。
+        </p>
+      </div>
+
+      <div className="ranking-card rounded-xl p-5">
+        <h4 className="font-display text-xl text-yellow-300 mb-3">📅 デビュー前の歴史</h4>
+        <div className="space-y-3 text-sm md:text-base">
+          <div className="flex gap-3">
+            <span className="font-display text-yellow-300 w-20 shrink-0">2001</span>
+            <span>11歳のG-DRAGONがYGエンタテインメントの練習生に。最長6年間の練習期間</span>
+          </div>
+          <div className="flex gap-3">
+            <span className="font-display text-yellow-300 w-20 shrink-0">2005</span>
+            <span>TAEYANG・SEUNGRI・DAESUNG・T.O.Pが順次練習生に合流</span>
+          </div>
+          <div className="flex gap-3">
+            <span className="font-display text-yellow-300 w-20 shrink-0">2006.05</span>
+            <span>サバイバル番組「BIGBANG Documentary」放映開始（6人から最終選抜）</span>
+          </div>
+          <div className="flex gap-3">
+            <span className="font-display text-yellow-300 w-20 shrink-0">2006.08.19</span>
+            <span>ソウル五輪体操競技場でデビューコンサート開催（このグループの誕生日）</span>
+          </div>
+          <div className="flex gap-3">
+            <span className="font-display text-yellow-300 w-20 shrink-0">2006.12</span>
+            <span>最初のフルアルバム「Bigbang Vol. 1」リリース</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="quote-block">
+        <p>
+          デビュー直後の人気は<span className="gold-text font-bold">「微妙」</span>だったらしい。
+          ヒップホップに振り切ってたから世間から「アイドルらしくない」と言われた。
+          でも翌年「Lies」で世間がひっくり返る。
+        </p>
+      </div>
+
+      <div className="grid grid-cols-2 gap-4">
+        <PhotoCard src={IMG.gd2007} caption="2007 タイのG-DRAGON（19歳）" />
+        <PhotoCard src={IMG.topLg} caption="2009 T.O.P・LGフォン広告" />
+      </div>
+    </div>
+  );
+}
+
+function RevolutionChapter() {
+  return (
+    <div className="space-y-6">
+      <div className="text-center">
+        <div className="text-5xl mb-2">🌍</div>
+        <h2 className="font-display text-4xl gold-text">CHAPTER 3 — K-POP革命</h2>
+        <p className="text-yellow-200 mt-2">なぜBIGBANGは「伝説」と呼ばれるのか</p>
+      </div>
+
+      <PhotoCard src={IMG.mtvEma} caption="2011年 MTV Europe Music Awards で「Best Worldwide Act」受賞" />
+
+      <div className="space-y-5">
+        <div className="vip-card rounded-2xl p-6">
+          <h3 className="font-display text-2xl text-yellow-300 mb-3">① セルフプロデュースを持ち込んだ</h3>
+          <p className="leading-relaxed">
+            それまでのK-POPアイドルは「作曲家が作った曲を歌う」のが当たり前だった。
+            BIGBANGは<span className="gold-text font-bold">メンバー自身（特にG-DRAGON）が作詞・作曲・編曲</span>する
+            シンガーソングライター型アイドルの先駆け。今のBTSもSEVENTEENも、この道を踏襲してる。
+          </p>
+        </div>
+
+        <div className="vip-card rounded-2xl p-6">
+          <h3 className="font-display text-2xl text-yellow-300 mb-3">② ファッションで世界を魅了</h3>
+          <p className="leading-relaxed">
+            G-DRAGONは「アジアのファッションアイコン」と呼ばれ、CHANELのアジア初男性アンバサダー。
+            BIGBANGの衣装はそのままストリートファッションのトレンドになった。
+          </p>
+        </div>
+
+        <div className="vip-card rounded-2xl p-6">
+          <h3 className="font-display text-2xl text-yellow-300 mb-3">③ ジャンルを超えた音楽性</h3>
+          <p className="leading-relaxed">
+            ヒップホップ・R&B・EDM・バラード・トロット風と、ジャンルを横断する楽曲群。
+            「アイドルなのに聴ける」という新しい層を獲得した。
+          </p>
+        </div>
+
+        <div className="vip-card rounded-2xl p-6">
+          <h3 className="font-display text-2xl text-yellow-300 mb-3">④ 韓国アイドル史上初の海外大成功</h3>
+          <p className="leading-relaxed">
+            日本でドーム公演、世界ツアーで150万人動員。
+            <span className="gold-text font-bold">「K-POPの世界進出」を本当の意味で実現した最初のグループ</span>。
+          </p>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 gap-4">
+        <PhotoCard src={IMG.gdChanel} caption="G-DRAGON・CHANELイベント（2023）" />
+        <PhotoCard src={IMG.gdAirbnb} caption="G-DRAGON・Airbnbアジア顔（2015）" />
+      </div>
+
+      <div className="ranking-card rounded-xl p-5">
+        <h4 className="font-display text-xl text-yellow-300 mb-3">🏆 主な受賞・記録</h4>
+        <ul className="space-y-2 text-sm md:text-base">
+          <li>🎖️ 2011年 MTV Europe Music Awards Best Worldwide Act（アジア勢初）</li>
+          <li>🎖️ 韓国Gaon Digital Chart 1位獲得曲数：11曲（K-POP史上最多級）</li>
+          <li>🎖️ 2015-16 MADE World Tour 動員150万人（韓国アイドル史上最大規模）</li>
+          <li>🎖️ Made The Movie 映画化（アイドルでこの規模の映画は異例）</li>
+          <li>🎖️ 2026年 Coachella 出演（K-POP3大フェスの一つ）</li>
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+function SongsChapter() {
+  const songs = [
+    {
+      mv: MV.lies,
+      title: 'Lies (거짓말)',
+      year: 2007,
+      story: '2nd ミニアルバム収録。BIGBANGを国民的グループに押し上げた最初のメガヒット。韓国チャート6週連続1位、年末「Song of the Year」受賞。「거짓말, 거짓말, 거짓말이야〜」のキャッチーなサビは韓国人なら誰でも歌える。',
+      vibe: '切ない・キャッチー・初期BB',
+    },
+    {
+      mv: MV.haruHaru,
+      title: 'Haru Haru (하루하루)',
+      year: 2008,
+      story: '別れの痛みを歌った切ない名バラード。7週連続1位・デジタルダウンロード500万超え。「Haru Haru＝一日一日」の意味。MVは映画的なドラマ仕立てで、当時のK-POP MVを別次元に押し上げた。',
+      vibe: '切ない・泣ける・名バラード',
+    },
+    {
+      mv: MV.fantastic,
+      title: 'Fantastic Baby',
+      year: 2012,
+      story: 'BIGBANGを<span class="gold-text font-bold">世界的存在</span>にした記念碑的楽曲。EDMサウンド＋「ワワワ〜！」のフックで国境を越える中毒性。YouTube再生数3.1億超え。今でもクラブやフェスで定番。',
+      vibe: 'EDM・パワフル・代表曲',
+    },
+    {
+      mv: MV.bangBang,
+      title: 'BANG BANG BANG (뱅뱅뱅)',
+      year: 2015,
+      story: 'MADE Series A収録のリードシングル。2015年韓国年間チャート1位。ハードなビート＋パーティーアンセム的サビで、BIGBANGのライブ定番曲。「뱅뱅뱅！」のシャウトは2010年代K-POPのアイコン。',
+      vibe: 'ハード・パーティー・キラーチューン',
+    },
+    {
+      mv: MV.loser,
+      title: 'LOSER',
+      year: 2015,
+      story: 'BANG BANG BANGとは対照的に、孤独や敗北感を歌うエモーショナルなトラック。Billboard World Digital Songs 1位獲得。GD・TAEYANG・T.O.P・DAESUNG・SEUNGRI それぞれのソロパートが哲学的。',
+      vibe: 'エモい・哲学的・大人の楽曲',
+    },
+    {
+      mv: MV.stillLife,
+      title: 'Still Life (봄여름가을겨울)',
+      year: 2022,
+      story: '兵役と空白期間を経て4人で発表した<span class="gold-text font-bold">再結成シングル</span>。タイトルは「春夏秋冬」。穏やかなロック調で、過ぎゆく時間を慈しむ大人のBIGBANG。Billboard Global 200 Top10入り。MVは2024年に1億再生突破。',
+      vibe: '大人・穏やか・再始動',
+    },
+  ];
+
+  return (
+    <div className="space-y-6">
+      <div className="text-center">
+        <div className="text-5xl mb-2">🎵</div>
+        <h2 className="font-display text-4xl gold-text">CHAPTER 4 — 代表曲ガイド</h2>
+        <p className="text-yellow-200 mt-2">この6曲を聴けばBIGBANGが分かる</p>
+      </div>
+
+      <p className="text-center text-gray-300">▼ MVカードをクリックするとYouTubeで開けるよ</p>
+
+      <div className="grid md:grid-cols-2 gap-5">
+        {songs.map((s, i) => (
+          <div key={i} className="vip-card rounded-2xl overflow-hidden">
+            <MVCard mv={s.mv} />
+            <div className="p-5 space-y-3">
+              <div className="flex items-start justify-between gap-2">
+                <h3 className="font-display text-2xl text-yellow-300">{s.title}</h3>
+                <span className="badge shrink-0">{s.year}</span>
+              </div>
+              <div className="text-xs"><span className="badge badge-blue">{s.vibe}</span></div>
+              <p className="text-sm md:text-base text-gray-100 leading-relaxed" dangerouslySetInnerHTML={{__html: s.story}} />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="gradient-card rounded-2xl p-6">
+        <h3 className="font-display text-2xl text-yellow-300 mb-3">🎧 まず聴くならこの順</h3>
+        <ol className="space-y-2 text-sm md:text-base list-decimal list-inside">
+          <li><span className="gold-text font-bold">Fantastic Baby</span> → とにかく代表曲。最初はこれ</li>
+          <li><span className="gold-text font-bold">BANG BANG BANG</span> → パーティーで爆上がりするキラーチューン</li>
+          <li><span className="gold-text font-bold">Haru Haru</span> → 切なさのBIGBANG・名バラードの原点</li>
+          <li><span className="gold-text font-bold">Lies</span> → BIGBANGを国民的グループにした原点</li>
+          <li><span className="gold-text font-bold">LOSER</span> → 大人になったBIGBANGのエモいやつ</li>
+          <li><span className="gold-text font-bold">Still Life</span> → 兵役後の現在を感じる現行曲</li>
+        </ol>
+      </div>
+
+      <PhotoCard src={IMG.madeDalian} caption="2015 MADE World Tour 中国・大連公演" />
+    </div>
+  );
+}
+
+function SoloChapter() {
+  return (
+    <div className="space-y-6">
+      <div className="text-center">
+        <div className="text-5xl mb-2">✨</div>
+        <h2 className="font-display text-4xl gold-text">CHAPTER 5 — ソロ活動</h2>
+        <p className="text-yellow-200 mt-2">グループの外でもそれぞれが伝説</p>
+      </div>
+
+      <div className="vip-card rounded-2xl p-6 space-y-4">
+        <p className="leading-relaxed">
+          BIGBANGの面白いところは、メンバー全員がソロでも超実力派なこと。
+          グループ活動の合間にソロアルバム出して、それぞれが普通にトップアーティスト。
+        </p>
+      </div>
+
+      <div className="space-y-5">
+        <div className="vip-card rounded-2xl overflow-hidden">
+          <div className="grid md:grid-cols-3">
+            <PhotoCard src={IMG.gdAirbnb} caption="G-DRAGON" />
+            <div className="md:col-span-2 p-5 space-y-3">
+              <h3 className="font-display text-2xl gold-text">G-DRAGON（GD）</h3>
+              <div className="space-y-2 text-sm md:text-base">
+                <p>BIGBANGの頭脳。ソロでもK-POP史上最高峰のアーティスト。</p>
+                <ul className="space-y-1 list-disc list-inside text-gray-200">
+                  <li>「Heartbreaker」（2009）— ソロデビューアルバム・国内100万枚</li>
+                  <li>「One of a Kind」（2012）— ヒップホップミニアルバム</li>
+                  <li>「쿠데타 (Coup d'État)」（2013）— アーティストとしての評価確立</li>
+                  <li>「権志龍 / Kwon Ji Yong」（2017）— 兵役直前のソロ</li>
+                  <li>「POWER」「TOO BAD」（2024-25）— 復帰ソロ・大ヒット</li>
+                </ul>
+                <p className="text-gray-300 text-sm mt-2">ファッションブランド「<span className="gold-text">PEACEMINUSONE</span>」も運営。NIKEとのコラボで世界的話題に。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="vip-card rounded-2xl overflow-hidden">
+          <div className="grid md:grid-cols-3">
+            <PhotoCard src={IMG.taeyang2012} caption="TAEYANG" />
+            <div className="md:col-span-2 p-5 space-y-3">
+              <h3 className="font-display text-2xl gold-text">TAEYANG（太陽）</h3>
+              <div className="space-y-2 text-sm md:text-base">
+                <p>BIGBANGのソウルヴォイス。R&B路線で個人の音楽世界が確立されている。</p>
+                <ul className="space-y-1 list-disc list-inside text-gray-200">
+                  <li>「Wedding Dress」（2009）— ソロ代表曲・結婚式定番</li>
+                  <li>「Eyes, Nose, Lips」（2014）— 各国アーティストカバー多数の世界的バラード</li>
+                  <li>「RISE」「WHITE NIGHT」アルバム — ソロでもアリーナ公演</li>
+                  <li>「Vibe (feat. Jimin of BTS)」（2023）— BTSのJiminとコラボで世界1位級</li>
+                </ul>
+                <p className="text-gray-300 text-sm mt-2">妻はBIGBANGプロデュースの女優ミン・ヒョリン。2018年結婚。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="vip-card rounded-2xl overflow-hidden">
+          <div className="grid md:grid-cols-3">
+            <PhotoCard src={IMG.top2012} caption="T.O.P" />
+            <div className="md:col-span-2 p-5 space-y-3">
+              <h3 className="font-display text-2xl gold-text">T.O.P</h3>
+              <div className="space-y-2 text-sm md:text-base">
+                <p>クールキャラ路線。音楽より俳優活動でも成功した稀有なアイドル。</p>
+                <ul className="space-y-1 list-disc list-inside text-gray-200">
+                  <li>映画「タザ：神の手」「同窓生」「コミッショナー」など主演級多数</li>
+                  <li>ドラマ「IRIS（アイリス）」（2009）</li>
+                  <li>音楽：GD&TOPユニット「Knock Out」「Don't Go Home」</li>
+                  <li>2017年大麻問題で謹慎・2023年BIGBANG脱退</li>
+                </ul>
+                <p className="text-gray-300 text-sm mt-2">2024年Netflixドラマ「イカゲーム」シーズン2に出演復帰。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="vip-card rounded-2xl overflow-hidden">
+          <div className="grid md:grid-cols-3">
+            <PhotoCard src={IMG.daesung2012} caption="DAESUNG (D-LITE)" />
+            <div className="md:col-span-2 p-5 space-y-3">
+              <h3 className="font-display text-2xl gold-text">DAESUNG（D-LITE）</h3>
+              <div className="space-y-2 text-sm md:text-base">
+                <p>日本ではD-LITE名義で単独活動。日本市場で抜群の人気を誇る。</p>
+                <ul className="space-y-1 list-disc list-inside text-gray-200">
+                  <li>日本ソロアルバム「D'scover」「DLive」など</li>
+                  <li>日本単独ドームツアー（京セラドーム・東京ドーム）開催</li>
+                  <li>明るい笑顔とトロット風楽曲で日本のファンに大人気</li>
+                  <li>2023年YGエンタテインメント契約満了・独立</li>
+                </ul>
+                <p className="text-gray-300 text-sm mt-2">日本語が堪能でバラエティ番組「金スマ」等にも出演。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function HiatusChapter() {
+  return (
+    <div className="space-y-6">
+      <div className="text-center">
+        <div className="text-5xl mb-2">💔</div>
+        <h2 className="font-display text-4xl gold-text">CHAPTER 6 — 空白期間</h2>
+        <p className="text-yellow-200 mt-2">2017〜2022 — BIGBANGが沈黙した5年間</p>
+      </div>
+
+      <PhotoCard src={IMG.gaon2016} caption="2016 Gaon Chart Music Awards・5人時代最後の輝き" />
+
+      <div className="vip-card rounded-2xl p-6 space-y-4">
+        <h3 className="font-display text-2xl text-yellow-300">⚔️ 韓国の兵役問題</h3>
+        <p className="leading-relaxed">
+          韓国の男性は原則<span className="gold-text font-bold">満28歳までに約2年間の兵役</span>に行く義務がある。
+          BIGBANGメンバーも順番に兵役へ。これでグループ活動が約5年間ストップした。
+        </p>
+        <div className="space-y-2 text-sm md:text-base">
+          <div className="flex gap-3">
+            <span className="font-display text-yellow-300 w-32 shrink-0">2017.02</span>
+            <span>T.O.P が義務警察として入隊</span>
+          </div>
+          <div className="flex gap-3">
+            <span className="font-display text-yellow-300 w-32 shrink-0">2018.02</span>
+            <span>TAEYANG・G-DRAGON が現役兵として入隊（同時期）</span>
+          </div>
+          <div className="flex gap-3">
+            <span className="font-display text-yellow-300 w-32 shrink-0">2018.03</span>
+            <span>DAESUNG・SEUNGRI 入隊</span>
+          </div>
+          <div className="flex gap-3">
+            <span className="font-display text-yellow-300 w-32 shrink-0">2018.03</span>
+            <span>「Flower Road」発表 — 兵役前の<span className="gold-text">最後のシングル</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div className="vip-card rounded-2xl p-6 space-y-4 border-red-500/30">
+        <h3 className="font-display text-2xl text-red-300">🔥 Burning Sun スキャンダル</h3>
+        <p className="leading-relaxed">
+          兵役中の<span className="gold-text font-bold">2019年</span>、SEUNGRIが経営に関わっていた江南の高級クラブ「Burning Sun」で
+          薬物・暴力・違法盗撮など複合的なスキャンダルが発覚。SEUNGRIは芸能界引退を表明し、
+          後に有罪判決を受けた。BIGBANGのイメージも大きく傷ついた。
+        </p>
+        <span className="badge badge-red">SEUNGRI 2019年3月 引退</span>
+      </div>
+
+      <div className="vip-card rounded-2xl p-6 space-y-4">
+        <h3 className="font-display text-2xl text-yellow-300">📜 T.O.P 脱退</h3>
+        <p className="leading-relaxed">
+          兵役中の大麻問題から始まり、活動再開後もBIGBANGとは距離を置く形に。
+          <span className="gold-text font-bold">2022年5月にYGエンタテインメントとの契約満了</span>。
+          翌2023年、正式にBIGBANGからの脱退を発表した。
+        </p>
+        <span className="badge badge-red">T.O.P 2023年5月 脱退</span>
+      </div>
+
+      <div className="vip-card rounded-2xl p-6 space-y-4">
+        <h3 className="font-display text-2xl text-yellow-300">🌱 DAESUNG・TAEYANG・G-DRAGON が独立</h3>
+        <p className="leading-relaxed">
+          BIGBANG自体は3人で継続しつつ、メンバーは順次YGとの契約を終了。
+          各自独自の事務所・ブランドで活動を継続する形になった。
+        </p>
+        <div className="text-sm space-y-1 text-gray-300">
+          <div>・DAESUNG：2022年12月 YG契約満了</div>
+          <div>・G-DRAGON：2023年6月 YG契約満了 → 独立</div>
+          <div>・TAEYANG：YG子会社「THEBLACKLABEL」へ移籍</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ReturnChapter() {
+  return (
+    <div className="space-y-6">
+      <div className="text-center">
+        <div className="text-5xl mb-2">🎶</div>
+        <h2 className="font-display text-4xl gold-text">CHAPTER 7 — 再始動と現在</h2>
+        <p className="text-yellow-200 mt-2">2022 Still Life → 2026 Coachella へ</p>
+      </div>
+
+      <YouTubeEmbed id={MV.stillLife.id} title="BIGBANG Still Life" />
+
+      <div className="vip-card rounded-2xl p-6 space-y-4">
+        <h3 className="font-display text-2xl text-yellow-300">🌸 2022年4月「Still Life（봄여름가을겨울）」</h3>
+        <p className="leading-relaxed">
+          兵役・空白期間を経て、<span className="gold-text font-bold">G-DRAGON・T.O.P・TAEYANG・DAESUNG の4人体制</span>で
+          発表された再結成シングル。タイトルは韓国の名曲「春夏秋冬」のタイトルから。
+        </p>
+        <p className="leading-relaxed">
+          サウンドは過去の派手な作品とは違い、穏やかで内省的なロックバラード。
+          歳を重ねたBIGBANGの「今」が詰まった作品で、世界中のVIPが涙した。
+        </p>
+        <ul className="space-y-1 list-disc list-inside text-sm text-gray-200">
+          <li>Billboard Global 200 Top 10 入り</li>
+          <li>韓国Gaon Digital Chart 11度目の1位（K-POP史上最多級）</li>
+          <li>2024年12月 MVがYouTube1億再生突破</li>
+        </ul>
+      </div>
+
+      <PhotoCard src={IMG.madePress} caption="2016 MADE プレスカンファレンス（4人体制への布石）" />
+
+      <div className="vip-card rounded-2xl p-6 space-y-4">
+        <h3 className="font-display text-2xl text-yellow-300">🔥 2024-2025 個々の華麗な復活</h3>
+        <div className="grid md:grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <h4 className="font-bold text-yellow-200">G-DRAGON 完全復活</h4>
+            <ul className="space-y-1 text-sm list-disc list-inside text-gray-200">
+              <li>2024年10月「POWER」シングル発表</li>
+              <li>2024年11月 ソロアルバム「Übermensch」リリース</li>
+              <li>2024年11月 MAMA Awardsで7年ぶりライブ復活</li>
+              <li>2025年「Übermensch World Tour」開催（東京・大阪含む）</li>
+            </ul>
+          </div>
+          <div className="space-y-2">
+            <h4 className="font-bold text-yellow-200">TAEYANG・DAESUNG も活動</h4>
+            <ul className="space-y-1 text-sm list-disc list-inside text-gray-200">
+              <li>TAEYANG：BTS JiminとのコラボがYouTube1億超え</li>
+              <li>TAEYANG：日本ファンミ・アジアツアー継続</li>
+              <li>DAESUNG：日本でD-LITE名義ドームツアー</li>
+              <li>DAESUNG：独立後の自主企画ツアー</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div className="gradient-card rounded-2xl p-6">
+        <h3 className="font-display text-2xl text-yellow-300 mb-3">🎤 2026 Coachella で20周年凱旋</h3>
+        <p className="leading-relaxed">
+          2006年デビューから20年。<span className="gold-text font-bold">2026年4月、米Coachella Music Festival</span>に
+          BIGBANGとして3人体制（G-DRAGON / TAEYANG / DAESUNG）でステージに立つ。
+          K-POPアーティストとしては最大級の海外フェスティバル出演で、世界中のVIPが歓喜の声を上げた。
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function CastChapter() {
+  const cast = [
+    {
+      name: 'G-DRAGON',
+      photos: [IMG.gd2025, IMG.gd2007, IMG.gdAirbnb, IMG.gdChanel],
+      data: {
+        '本名': '권지용 / クォン・ジヨン',
+        '生年月日': '1988年8月18日（37歳）',
+        '担当': 'リーダー / メインラッパー / プロデューサー',
+        '練習生期間': '11歳から約6年（YGエンタテインメント）',
+        '代表ソロ': 'Heartbreaker, Crayon, POWER, TOO BAD',
+        'ブランド': 'PEACEMINUSONE（自身のファッションブランド）',
+        '広告': 'CHANEL アジアアンバサダー / NIKE / Airbnb',
+        '特記': 'K-POP史上最も影響力のあるアーティストとされる',
+      },
+    },
+    {
+      name: 'T.O.P',
+      photos: [IMG.top0to10, IMG.topLg, IMG.top2012, IMG.topMade],
+      data: {
+        '本名': '최승현 / チェ・スンヒョン',
+        '生年月日': '1987年11月4日（38歳）',
+        '担当': 'リードラッパー / 俳優',
+        '声': '低音バリトンボイス',
+        '代表ソロ': 'Turn It Up, Doom Dada',
+        '俳優作': 'IRIS, タザ：神の手, 同窓生, コミッショナー',
+        '特記': '2023年BIGBANG脱退。2024年Netflix「イカゲーム」S2出演',
+        '現状': '俳優・アート活動を中心に',
+      },
+    },
+    {
+      name: 'TAEYANG（太陽）',
+      photos: [IMG.taeyangMade, IMG.taeyang2012],
+      data: {
+        '本名': '동영배 / トン・ヨンベ',
+        '生年月日': '1988年5月14日（38歳）',
+        '担当': 'メインボーカル',
+        '声': 'ソウルフルなR&Bテノール',
+        '代表ソロ': 'Wedding Dress, Eyes Nose Lips, Vibe (feat. Jimin)',
+        '所属': 'THEBLACKLABEL（YG系列）',
+        '家族': '妻は女優ミン・ヒョリン（2018年結婚・子供1人）',
+        '特記': '敬虔なクリスチャン。BIGBANGの精神的支柱',
+      },
+    },
+    {
+      name: 'DAESUNG（D-LITE）',
+      photos: [IMG.daesungMade, IMG.daesung2012],
+      data: {
+        '本名': '강대성 / カン・デソン',
+        '生年月日': '1989年4月26日（37歳）',
+        '担当': 'リードボーカル',
+        '声': 'ハイトーンの明るい歌声',
+        '日本名': 'D-LITE（ディライト）',
+        '代表ソロ（日本）': '日本でドーム公演可能な唯一のK-POPソロ男性アイドル',
+        '所属': '2023年YG契約満了・独立',
+        '特記': '日本市場での人気が圧倒的。日本語堪能・バラエティ番組常連',
+      },
+    },
+  ];
+
+  return (
+    <div className="space-y-6">
+      <div className="text-center">
+        <div className="text-5xl mb-2">🎭</div>
+        <h2 className="font-display text-4xl gold-text">CAST — 詳細プロフィール</h2>
+        <p className="text-yellow-200 mt-2">現役4人を深掘り（脱退・休止中含む）</p>
+      </div>
+
+      <div className="space-y-8">
+        {cast.map((m, i) => (
+          <div key={i} className="vip-card rounded-2xl p-5 md:p-6">
+            <h3 className="font-graffiti text-3xl md:text-4xl gold-text crown-glow mb-4">{m.name}</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+              {m.photos.map((p, j) => <PhotoCard key={j} src={p} />)}
+            </div>
+            <table className="w-full text-sm md:text-base">
+              <tbody>
+                {Object.entries(m.data).map(([k, v]) => (
+                  <tr key={k} className="border-b border-yellow-500/10">
+                    <td className="py-2 pr-3 text-yellow-300 font-bold align-top whitespace-nowrap">{k}</td>
+                    <td className="py-2 text-gray-100">{v}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function QuizChapter() {
+  const questions = [
+    {
+      q: 'BIGBANGがデビューした年はいつ？',
+      choices: ['2004年', '2005年', '2006年', '2008年'],
+      ans: 2,
+      explain: '2006年8月19日、ソウル五輪体操競技場でデビューコンサート開催。今年（2026年）で20周年！',
+    },
+    {
+      q: 'BIGBANGの曲のほとんどを作詞・作曲しているメンバーは？',
+      choices: ['T.O.P', 'TAEYANG', 'G-DRAGON', 'DAESUNG'],
+      ans: 2,
+      explain: 'G-DRAGON（権志龍）が圧倒的なプロデュース才能を発揮。「セルフプロデュース型アイドル」のK-POP元祖。',
+    },
+    {
+      q: '2012年に世界的ヒットになったBIGBANGの代表曲は？',
+      choices: ['Lies', 'Haru Haru', 'Fantastic Baby', 'BANG BANG BANG'],
+      ans: 2,
+      explain: 'Fantastic Baby（2012）。EDMサウンドと「ワワワ〜！」のフックでYouTube3.1億超え。',
+    },
+    {
+      q: '日本で「D-LITE」名義で活動しているメンバーは？',
+      choices: ['G-DRAGON', 'TAEYANG', 'DAESUNG', 'SEUNGRI'],
+      ans: 2,
+      explain: 'DAESUNG＝D-LITE。日本でドーム公演ができるレベルの大人気で、日本語も堪能。',
+    },
+    {
+      q: '兵役・スキャンダルを経た2022年、4人で発表した再結成シングルは？',
+      choices: ['Flower Road', 'Still Life', 'LOSER', 'BANG BANG BANG'],
+      ans: 1,
+      explain: 'Still Life（봄여름가을겨울＝春夏秋冬）。穏やかなロックバラードで4人体制で発表された。',
+    },
+    {
+      q: 'BIGBANGのファンダム名は？',
+      choices: ['ARMY', 'BLINK', 'VIP', 'ONCE'],
+      ans: 2,
+      explain: 'VIP（빅뱅 VIP）。BIGBANGファンの呼び名。BIGBANGが歌う「VIP」という曲もある。',
+    },
+  ];
+
+  const [answers, setAnswers] = useState({});
+  const [submitted, setSubmitted] = useState(false);
+
+  const select = (qi, ci) => {
+    setAnswers({ ...answers, [qi]: ci });
+  };
+  const score = Object.entries(answers).filter(([k, v]) => questions[k].ans === v).length;
+  const allAnswered = Object.keys(answers).length === questions.length;
+
+  return (
+    <div className="space-y-6">
+      <div className="text-center">
+        <div className="text-5xl mb-2">🧠</div>
+        <h2 className="font-display text-4xl gold-text">QUIZ — 理解度チェック</h2>
+        <p className="text-yellow-200 mt-2">全6問・気軽に答えてね</p>
+      </div>
+
+      <div className="space-y-5">
+        {questions.map((q, qi) => (
+          <div key={qi} className="vip-card rounded-2xl p-5">
+            <h4 className="font-bold mb-3"><span className="text-yellow-300">Q{qi + 1}.</span> {q.q}</h4>
+            <div className="grid sm:grid-cols-2 gap-2">
+              {q.choices.map((c, ci) => {
+                const picked = answers[qi] === ci;
+                const correct = submitted && q.ans === ci;
+                const wrongPick = submitted && picked && q.ans !== ci;
+                return (
+                  <button
+                    key={ci}
+                    onClick={() => !submitted && select(qi, ci)}
+                    className={`text-left rounded-lg px-4 py-2 border transition
+                      ${correct ? 'bg-green-500/20 border-green-400 text-green-200' :
+                        wrongPick ? 'bg-red-500/20 border-red-400 text-red-200' :
+                        picked ? 'bg-yellow-500/20 border-yellow-400 text-yellow-100' :
+                        'bg-white/5 border-white/10 hover:border-yellow-400/50'}`}
+                    disabled={submitted}
+                  >
+                    {String.fromCharCode(65 + ci)}. {c}
+                  </button>
+                );
+              })}
+            </div>
+            {submitted && (
+              <p className="mt-3 text-sm text-gray-200 bg-black/30 rounded-lg p-3">💡 {q.explain}</p>
+            )}
+          </div>
+        ))}
+      </div>
+
+      <div className="text-center">
+        {!submitted ? (
+          <button
+            onClick={() => setSubmitted(true)}
+            disabled={!allAnswered}
+            className={`font-display text-2xl px-10 py-4 rounded-xl ${allAnswered ? 'bg-gradient-to-r from-yellow-400 to-orange-500 text-black pulse-gold' : 'bg-gray-700 text-gray-400 cursor-not-allowed'}`}
+          >
+            答え合わせ！
+          </button>
+        ) : (
+          <div className="vip-card rounded-2xl p-6 inline-block">
+            <p className="font-display text-3xl gold-text">{score} / {questions.length} 正解</p>
+            <p className="text-sm text-gray-300 mt-2">
+              {score === questions.length ? '🎉 完璧！VIPの素質あり' :
+               score >= 4 ? '👍 もうBIGBANG入門完了レベル！' :
+               score >= 2 ? '😊 おしい！もう一回プロローグから読み直してみよう' :
+               '📖 大丈夫、ここから一緒にBIGBANGを知っていこう！'}
+            </p>
+            <button
+              onClick={() => { setAnswers({}); setSubmitted(false); }}
+              className="mt-4 px-6 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-sm"
+            >
+              もう一度
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function ReadyChapter() {
+  return (
+    <div className="space-y-6">
+      <div className="text-center">
+        <div className="text-5xl mb-2">🥹</div>
+        <h2 className="font-display text-4xl gold-text">READY — もっと深く</h2>
+        <p className="text-yellow-200 mt-2">VIPへの第一歩を踏み出そう</p>
+      </div>
+
+      <div className="vip-card rounded-2xl p-6 space-y-4">
+        <h3 className="font-display text-2xl text-yellow-300">🎵 まず聴くべき5曲（プレイリスト推奨順）</h3>
+        <ol className="space-y-3 list-decimal list-inside">
+          <li><a href={`https://www.youtube.com/watch?v=${MV.fantastic.id}`} target="_blank" rel="noreferrer" className="text-yellow-300 hover:underline">Fantastic Baby (2012)</a> — 最初の入り口</li>
+          <li><a href={`https://www.youtube.com/watch?v=${MV.bangBang.id}`} target="_blank" rel="noreferrer" className="text-yellow-300 hover:underline">BANG BANG BANG (2015)</a> — パーティーアンセム</li>
+          <li><a href={`https://www.youtube.com/watch?v=${MV.haruHaru.id}`} target="_blank" rel="noreferrer" className="text-yellow-300 hover:underline">Haru Haru (2008)</a> — 切ない名バラード</li>
+          <li><a href={`https://www.youtube.com/watch?v=${MV.loser.id}`} target="_blank" rel="noreferrer" className="text-yellow-300 hover:underline">LOSER (2015)</a> — エモい大人BIGBANG</li>
+          <li><a href={`https://www.youtube.com/watch?v=${MV.stillLife.id}`} target="_blank" rel="noreferrer" className="text-yellow-300 hover:underline">Still Life (2022)</a> — 再結成・現在のBIGBANG</li>
+        </ol>
+      </div>
+
+      <div className="vip-card rounded-2xl p-6 space-y-4">
+        <h3 className="font-display text-2xl text-yellow-300">📺 もっと知るリンク集</h3>
+        <ul className="space-y-2 text-sm md:text-base">
+          <li>📺 <a href="https://www.youtube.com/@BIGBANG" target="_blank" rel="noreferrer" className="text-yellow-300 hover:underline">BIGBANG 公式YouTubeチャンネル</a></li>
+          <li>📺 <a href="https://www.youtube.com/@OFFICIALGDRAGON" target="_blank" rel="noreferrer" className="text-yellow-300 hover:underline">G-DRAGON 公式YouTube</a></li>
+          <li>📷 <a href="https://www.instagram.com/xxxibgdrgn/" target="_blank" rel="noreferrer" className="text-yellow-300 hover:underline">G-DRAGON 公式Instagram (@xxxibgdrgn)</a></li>
+          <li>📷 <a href="https://www.instagram.com/__youngbae__/" target="_blank" rel="noreferrer" className="text-yellow-300 hover:underline">TAEYANG 公式Instagram (@__youngbae__)</a></li>
+          <li>📷 <a href="https://www.instagram.com/daesungstagram/" target="_blank" rel="noreferrer" className="text-yellow-300 hover:underline">DAESUNG 公式Instagram (@daesungstagram)</a></li>
+          <li>🌐 <a href="https://en.wikipedia.org/wiki/Big_Bang_(South_Korean_band)" target="_blank" rel="noreferrer" className="text-yellow-300 hover:underline">Wikipedia (English) — 詳細年表</a></li>
+        </ul>
+      </div>
+
+      <div className="vip-card rounded-2xl p-6 space-y-4">
+        <h3 className="font-display text-2xl text-yellow-300">🎤 2026 Coachella 関連</h3>
+        <p className="leading-relaxed">
+          2026年4月、米Coachella Music Festivalにて、BIGBANGが3人体制（G-DRAGON / TAEYANG / DAESUNG）で
+          20周年凱旋ステージに登場予定。事前にFantastic Baby・BANG BANG BANG・Still Lifeあたりは
+          聴き込んでおくとライブ配信の感動が倍になるよ。
+        </p>
+      </div>
+
+      <div className="text-center pt-6">
+        <div className="font-graffiti text-4xl gold-text crown-glow">WELCOME TO VIP</div>
+        <p className="text-yellow-200 mt-3">これでもう、あなたも"BIGBANG入門"完了！</p>
+      </div>
+
+      <PhotoCard src={IMG.concert0to10} caption="2016 0.TO.10 — VIPと一緒に積み重ねた10年の節目" />
+    </div>
+  );
+}
+
+// ===== Tabs Layout =====
+const renderChapter = (id) => {
+  switch(id) {
+    case 'prologue': return <PrologueChapter />;
+    case 'members': return <MembersChapter />;
+    case 'debut': return <DebutChapter />;
+    case 'revo': return <RevolutionChapter />;
+    case 'songs': return <SongsChapter />;
+    case 'solo': return <SoloChapter />;
+    case 'hiatus': return <HiatusChapter />;
+    case 'return': return <ReturnChapter />;
+    case 'cast': return <CastChapter />;
+    case 'quiz': return <QuizChapter />;
+    case 'ready': return <ReadyChapter />;
+    default: return null;
+  }
+};
+
+function App() {
+  const [activeIdx, setActiveIdx] = useState(0);
+  const active = CHAPTERS[activeIdx];
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [activeIdx]);
+
+  return (
+    <div className="min-h-screen">
+      {/* Header */}
+      <header className="border-b border-yellow-500/20 bg-black/30 backdrop-blur-md sticky top-0 z-50">
+        <div className="max-w-6xl mx-auto px-3 md:px-6 py-3">
+          <div className="flex items-center justify-between gap-3 mb-3">
+            <div className="flex items-center gap-2">
+              <span className="text-2xl">👑</span>
+              <h1 className="font-graffiti text-xl md:text-2xl gold-text">BIGBANG 超入門</h1>
+            </div>
+            <div className="text-xs text-gray-400">{activeIdx + 1} / {CHAPTERS.length}</div>
+          </div>
+          <div className="overflow-x-auto -mx-3 md:-mx-6 px-3 md:px-6 pb-1">
+            <div className="flex gap-2 min-w-min">
+              {CHAPTERS.map((c, i) => (
+                <button
+                  key={c.id}
+                  onClick={() => setActiveIdx(i)}
+                  className={`shrink-0 rounded-lg px-3 py-2 text-xs md:text-sm font-bold whitespace-nowrap transition ${activeIdx === i ? 'tab-active' : 'tab-inactive'}`}
+                >
+                  <span className="mr-1">{c.emoji}</span>
+                  <span>{c.label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="scroll-indicator h-0.5 mt-2 rounded"></div>
+        </div>
+      </header>
+
+      {/* Main */}
+      <main className="max-w-4xl mx-auto px-4 py-8 md:py-12">
+        {renderChapter(active.id)}
+      </main>
+
+      {/* Footer Nav */}
+      <nav className="sticky bottom-0 bg-black/60 backdrop-blur-md border-t border-yellow-500/20">
+        <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+          <button
+            onClick={() => setActiveIdx(Math.max(0, activeIdx - 1))}
+            disabled={activeIdx === 0}
+            className="nav-btn rounded-lg px-4 py-2 bg-white/10 hover:bg-yellow-500/20 text-sm"
+          >
+            ← 前へ
+          </button>
+          <div className="text-center text-xs">
+            <div className="text-gray-400">{active.emoji} {active.label}</div>
+            <div className="text-yellow-300 font-bold">{active.sub}</div>
+          </div>
+          <button
+            onClick={() => setActiveIdx(Math.min(CHAPTERS.length - 1, activeIdx + 1))}
+            disabled={activeIdx === CHAPTERS.length - 1}
+            className="nav-btn rounded-lg px-4 py-2 bg-gradient-to-r from-yellow-500 to-orange-500 text-black text-sm font-bold"
+          >
+            次へ →
+          </button>
+        </div>
+      </nav>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
