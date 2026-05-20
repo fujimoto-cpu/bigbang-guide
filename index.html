@@ -60,7 +60,8 @@
     transition: all 0.3s ease;
   }
   .photo-frame:hover { border-color: #FFD700; transform: translateY(-4px); box-shadow: 0 12px 32px rgba(255, 215, 0, 0.3); }
-  .photo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .photo-frame { background: #0a0014; }
+  .photo-frame img { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; }
   .tab-active { background: linear-gradient(135deg, #FFD700, #FFA500); color: #0a0014; font-weight: 900; box-shadow: 0 4px 16px rgba(255, 215, 0, 0.5); }
   .tab-inactive { background: rgba(255, 255, 255, 0.05); color: #d0d0d0; }
   .tab-inactive:hover { background: rgba(255, 215, 0, 0.15); color: #FFD700; }
